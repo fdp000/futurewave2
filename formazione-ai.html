@@ -11,28 +11,38 @@
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <a href="index.html" class="logo">
-                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 50C20 38.9543 28.9543 30 40 30C51.0457 30 60 38.9543 60 50C60 61.0457 51.0457 70 40 70" stroke="var(--color-primary)" stroke-width="10" stroke-linecap="round"/>
-                    <path d="M40 50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50C80 61.0457 71.0457 70 60 70" stroke="var(--color-secondary)" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
-                </svg>
-                <span class="logo-text">FutureWave</span>
-            </a>
+<header>
+    <div class="container">
+        <a href="index.html" class="logo">
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 50C20 38.9543 28.9543 30 40 30C51.0457 30 60 38.9543 60 50C60 61.0457 51.0457 70 40 70" stroke="var(--color-primary)" stroke-width="10" stroke-linecap="round"/>
+                <path d="M40 50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50C80 61.0457 71.0457 70 60 70" stroke="var(--color-secondary)" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+            </svg>
+            <span class="logo-text">FutureWave</span>
+        </a>
+
+        <button class="hamburger-menu" aria-label="Apri menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-wrapper">
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="chi-siamo.html">Chi Siamo</a></li>
-                    <li class="nav-active"><a href="formazione-ai.html">Formazione AI</a></li>
-                    <li><a href="classifica.html">Classifica</a></li> 
+                    <li class="nav-active"><a href="formazione-ai.html">Formazione AI</a></li> <li><a href="classifica.html">Classifica</a></li> 
                     <li><a href="gestisci-team.html">Gestisci Team</a></li> 
                     <li><a href="portale-manager.html">Manager</a></li>
                 </ul>
             </nav>
+            
+            <a href="login.html" class="cta-button" style="color: #FFFFFF; margin-left: 1.5rem;">Accedi</a>
         </div>
-    </header>
 
+    </div>
+</header>
     <main class="main-page-content">
 
         <section id="training-hero" class="fade-in-section is-visible" style="text-align: center;">
@@ -96,7 +106,30 @@
                 </div>
             </section>
 
-        </div>
+            <section class="step-section fade-in-section">
+                <div class="step-header">
+                    <div class="step-circle animate-on-visible">3</div>
+                    <h2 class="step-title animate-on-visible delay-1">Premi per i Vincitori</h2>
+                </div>
+        
+                <div class="step-content-wrapper"> 
+                    <div class="step-content animate-on-visible delay-2">
+                        <p>La competizione premia l'eccellenza! I membri del <strong>team vincitore di ogni nazione</strong> si aggiudicheranno fantastici premi per continuare a innovare:</p>
+                        <ul style="margin-top: 1rem; margin-left: 1.5rem; line-height: 1.6;">
+                            <li><strong>1 anno di abbonamento gratuito a ChatGPT Plus</strong>.</li>
+                            <li><strong>€500 in buoni TicketOne</strong> da spendere per eventi e concerti.</li>
+                        </ul>
+                    </div>
+                     
+                    <div class="kpi-box-wrapper animate-on-visible delay-3">
+                        <div class="kpi-box" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 2rem; padding: 1rem;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="Logo ChatGPT" style="max-width: 140px; height: auto; border-radius: 25px;">
+                            <img src="images/ticketone.png" alt="Logo TicketOne" style="max-width: 160px; height: auto; background: white; padding: 5px; border-radius: 8px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </div>
     </main>
 
     <footer>
@@ -105,8 +138,10 @@
         </div>
     </footer>
 
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- INIZIO CODICE VECCHIO (ANIMAZIONI) ---
             const sections = document.querySelectorAll('.fade-in-section');
             sections[0]?.classList.add('is-visible'); 
             const animatedChildrenInit = sections[0]?.querySelectorAll('.animate-on-visible');
@@ -126,8 +161,31 @@
             sections.forEach(section => {
                 if (!section.classList.contains('is-visible')) { observer.observe(section); } 
             });
-        });
+            // --- FINE CODICE VECCHIO ---
+
+
+            // ================================================
+            // === INCOLLA QUI IL NUOVO CODICE PER L'HAMBURGER ===
+            // ================================================
+            const hamburgerBtn = document.querySelector('.hamburger-menu');
+            const navWrapper = document.querySelector('.nav-wrapper');
+    
+            if (hamburgerBtn && navWrapper) {
+                hamburgerBtn.addEventListener('click', () => {
+                    hamburgerBtn.classList.toggle('is-active');
+                    navWrapper.classList.toggle('is-active');
+                    
+                    // Aggiorna aria-expanded per accessibilità
+                    const isActive = hamburgerBtn.classList.contains('is-active');
+                    hamburgerBtn.setAttribute('aria-expanded', isActive);
+                });
+            }
+            // ================================================
+            // === FINE CODICE HAMBURGER ===
+            // ================================================
+
+
+        }); // <-- Il listener DOMContentLoaded si chiude QUI
     </script>
 
-</body>
-</html>
+</body> </html>

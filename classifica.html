@@ -22,51 +22,41 @@
             flex-wrap: wrap; /* Permette ai bottoni di andare a capo */
             gap: 10px; /* Spazio tra i bottoni */
             position: relative;
-            /* Spazio SOTTO i filtri per far apparire la bandiera */
-            padding-bottom: 50px; 
+            /* Rimosso padding-bottom: 50px; */
             align-items: center;
         }
 
-        /* Wrapper per ogni bottone, necessario per posizionare la bandiera sotto */
-        .filter-btn-wrapper {
-            position: relative; /* Diventa l'ancora per la bandiera */
-            display: inline-block;
-        }
-        
-        /* La NUOVA bandiera che appare SOTTO il bottone attivo */
-        .leaderboard-nation-flag {
-            width: 50px; /* Più piccola di 80px */
-            height: auto;
-            border-radius: 6px; /* Angoli stondati */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            
-            /* Posizionamento assoluto relativo al wrapper */
-            position: absolute;
-            bottom: -45px; /* Spazio dal bottone */
-            left: 50%; /* Centrata */
-            
-            /* Animazione */
-            opacity: 0;
-            transform: translateX(-50%) translateY(-10px); /* Nascosta e leggermente su */
-            transition: all 0.3s ease;
-            pointer-events: none; /* Per non bloccare i click */
-        }
-        
-        .leaderboard-nation-flag.visible {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0); /* Appare scendendo */
+        /* --- NUOVO: Stile per i bottoni con bandiera --- */
+        .filter-btn {
+            display: inline-flex; /* Usa Flexbox per allineare */
+            align-items: center;  /* Centra verticalmente */
+            gap: 8px;             /* Spazio tra img e testo */
+            padding: 0.6rem 1rem; /* Padding leggermente aggiustato */
         }
 
+        /* --- NUOVO: Stile per la bandiera DENTRO il bottone --- */
+        .filter-flag {
+            width: 20px; /* Piccola e contenuta */
+            height: auto;
+            border-radius: 3px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Regole CSS per la bandiera grande esterna
+           (.filter-btn-wrapper, .leaderboard-nation-flag)
+           RIMOSSE perché non più necessarie.
+        */
+
         .inline-flag {
-            width: 32px; /* Era 24px, ora più grande */
+            width: 32px; 
             height: auto;
             vertical-align: middle;
-            border-radius: 4px; /* Angoli stondati */
+            border-radius: 4px; 
         }
 
         .leaderboard-table th.col-flag,
         .leaderboard-table td.col-flag {
-            width: 50px; /* Spazio per la nuova bandiera da 32px */
+            width: 50px; 
         }
         .leaderboard-table.nation-view th.col-flag,
         .leaderboard-table.nation-view td.col-flag,
@@ -75,22 +65,29 @@
             display: none;
         }
     </style>
-
-</head>
+    </head>
 <body>
 
-    <header>
-        <div class="container">
-            <a href="index.html" class="logo">
-                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 50C20 38.9543 28.9543 30 40 30C51.0457 30 60 38.9543 60 50C60 61.0457 51.0457 70 40 70" stroke="var(--color-primary)" stroke-width="10" stroke-linecap="round"/>
-                    <path d="M40 50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50C80 61.0457 71.0457 70 60 70" stroke="var(--color-secondary)" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
-                </svg>
-                <span class="logo-text">FutureWave</span>
-            </a>
+<header>
+    <div class="container">
+        <a href="index.html" class="logo">
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 50C20 38.9543 28.9543 30 40 30C51.0457 30 60 38.9543 60 50C60 61.0457 51.0457 70 40 70" stroke="var(--color-primary)" stroke-width="10" stroke-linecap="round"/>
+                <path d="M40 50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50C80 61.0457 71.0457 70 60 70" stroke="var(--color-secondary)" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+            </svg>
+            <span class="logo-text">FutureWave</span>
+        </a>
+
+        <button class="hamburger-menu" aria-label="Apri menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-wrapper">
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li> 
                     <li><a href="chi-siamo.html">Chi Siamo</a></li>
                     <li><a href="formazione-ai.html">Formazione AI</a></li>
                     <li class="nav-active"><a href="classifica.html">Classifica</a></li> 
@@ -98,8 +95,12 @@
                     <li><a href="portale-manager.html">Manager</a></li>
                 </ul>
             </nav>
+            
+            <a href="login.html" class="cta-button" style="color: #FFFFFF; margin-left: 1.5rem;">Accedi</a>
         </div>
-    </header>
+
+    </div>
+</header>
 
     <main class="main-page-content">
 
@@ -119,33 +120,30 @@
                         
                         <span><strong>Filtra:</strong></span>
                         
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn active" data-nation="all">Tutte</button>
-                        </div>
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn" data-nation="it">Italia</button>
-                        </div>
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn" data-nation="fr">Francia</button>
-                        </div>
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn" data-nation="de">Germania</button>
-                        </div>
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn" data-nation="es">Spagna</button>
-                        </div>
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn" data-nation="gb">Regno Unito</button>
-                        </div>
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn" data-nation="us">Stati Uniti</button>
-                        </div>
-                        <div class="filter-btn-wrapper">
-                            <button class="filter-btn" data-nation="in">India</button>
-                        </div>
+                        <button class="filter-btn active" data-nation="all">Tutte</button>
+                        <button class="filter-btn" data-nation="it">
+                            <img src="https://flagcdn.com/w40/it.png" alt="Italia" class="filter-flag"> Italia
+                        </button>
+                        <button class="filter-btn" data-nation="fr">
+                            <img src="https://flagcdn.com/w40/fr.png" alt="Francia" class="filter-flag"> Francia
+                        </button>
+                        <button class="filter-btn" data-nation="de">
+                            <img src="https://flagcdn.com/w40/de.png" alt="Germania" class="filter-flag"> Germania
+                        </button>
+                        <button class="filter-btn" data-nation="es">
+                            <img src="https://flagcdn.com/w40/es.png" alt="Spagna" class="filter-flag"> Spagna
+                        </button>
+                        <button class="filter-btn" data-nation="gb">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="Regno Unito" class="filter-flag"> Regno Unito
+                        </button>
+                        <button class="filter-btn" data-nation="us">
+                            <img src="https://flagcdn.com/w40/us.png" alt="Stati Uniti" class="filter-flag"> Stati Uniti
+                        </button>
+                        <button class="filter-btn" data-nation="in">
+                            <img src="https://flagcdn.com/w40/in.png" alt="India" class="filter-flag"> India
+                        </button>
                     </div>
                 </div>
-
                 <div class="animate-on-visible delay-1">
                     <table class="leaderboard-table" id="leaderboard-table">
                         <thead>
@@ -176,15 +174,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // === 1. DATI ===
-            const nationFlagUrls = {
-                 'it': 'https://flagcdn.com/w80/it.png',
-                 'fr': 'https://flagcdn.com/w80/fr.png',
-                 'de': 'https://flagcdn.com/w80/de.png',
-                 'es': 'https://flagcdn.com/w80/es.png',
-                 'gb': 'https://flagcdn.com/w80/gb.png',
-                 'us': 'https://flagcdn.com/w80/us.png',
-                 'in': 'https://flagcdn.com/w80/in.png'
-            };
+            
+            // Rimosso 'nationFlagUrls' (non più usato)
+            
             const smallFlagUrls = {
                  'it': 'https://flagcdn.com/w40/it.png',
                  'fr': 'https://flagcdn.com/w40/fr.png',
@@ -215,27 +207,13 @@
             const leaderboardTable = document.getElementById('leaderboard-table');
             const sections = document.querySelectorAll('.fade-in-section');
 
-            // === 3. FUNZIONE DI RENDER ===
+            // === 3. FUNZIONE DI RENDER (MODIFICATA) ===
             function renderTable(selectedNation) {
                 
-                document.querySelectorAll('.leaderboard-nation-flag').forEach(flag => flag.remove());
-
-                if (selectedNation !== 'all') {
-                    const activeButton = document.querySelector(`.filter-btn[data-nation="${selectedNation}"]`);
-                    if (activeButton) {
-                        const wrapper = activeButton.parentElement; 
-                        
-                        const flagImg = document.createElement('img');
-                        flagImg.src = nationFlagUrls[selectedNation];
-                        flagImg.alt = `Bandiera ${selectedNation.toUpperCase()}`;
-                        flagImg.className = 'leaderboard-nation-flag'; 
-                        wrapper.appendChild(flagImg);
-
-                        setTimeout(() => {
-                            flagImg.classList.add('visible');
-                        }, 10); 
-                    }
-                }
+                // --- Blocco di codice RIMOSSO ---
+                // Tutta la logica per creare la bandiera
+                // esterna .leaderboard-nation-flag è stata rimossa.
+                // ---
 
                 let filteredTeams = [];
                 if (selectedNation === 'all') {
@@ -302,8 +280,20 @@
                     observer.observe(section);
                 } 
             });
+            const hamburgerBtn = document.querySelector('.hamburger-menu');
+            const navWrapper = document.querySelector('.nav-wrapper');
+
+        if (hamburgerBtn && navWrapper) {
+            hamburgerBtn.addEventListener('click', () => {
+                hamburgerBtn.classList.toggle('is-active');
+                navWrapper.classList.toggle('is-active');
+                
+                // Aggiorna aria-expanded per accessibilità
+                const isActive = hamburgerBtn.classList.contains('is-active');
+                hamburgerBtn.setAttribute('aria-expanded', isActive);
+            });
+        }
         });
     </script>
-
-</body>
+    </body>
 </html>

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <header>
+  <header>
         <div class="container">
             <a href="index.html" class="logo">
                 <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,16 +20,28 @@
                 </svg>
                 <span class="logo-text">FutureWave</span>
             </a>
-            <nav>
-                <ul>
-                    <li class="nav-active"><a href="index.html">Home</a></li>
-                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
-                    <li><a href="formazione-ai.html">Formazione AI</a></li>
-                    <li><a href="classifica.html">Classifica</a></li> 
-                    <li><a href="gestisci-team.html">Gestisci Team</a></li> 
-                    <li><a href="portale-manager.html">Manager</a></li>
-                </ul>
-            </nav>
+
+            <button class="hamburger-menu" aria-label="Apri menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-wrapper">
+                <nav>
+                    <ul>
+                        <li class="nav-active"><a href="index.html">Home</a></li>
+                        <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                        <li><a href="formazione-ai.html">Formazione AI</a></li>
+                        <li><a href="classifica.html">Classifica</a></li> 
+                        <li><a href="gestisci-team.html">Gestisci Team</a></li> 
+                        <li><a href="portale-manager.html">Manager</a></li>
+                    </ul>
+                </nav>
+                
+                <a href="login.html" class="cta-button" style="color: #FFFFFF; margin-left: 1.5rem;">Accedi</a>
+            </div>
+
         </div>
     </header>
 
@@ -53,7 +65,7 @@
                         <a href="chi-siamo.html" class="cta-button" style="margin-top: 1.5rem; color: #FFFFFF;">Leggi di più</a>
                     </div>
                     <div class="preview-image animate-on-visible delay-1">
-                        <img src="https://source.unsplash.com/600x400/?collaboration,office,team,diversity" alt="Team diversificato che collabora in ufficio moderno">
+                        <img src="images/team diversificato.png" alt="Team diversificato che collabora in ufficio moderno">
                     </div>
                 </div>
             </div>
@@ -61,9 +73,9 @@
         
         <section class="preview-section fade-in-section">
             <div class="container">
-                <div class="home-preview-grid">
-                        <div class="preview-image animate-on-visible">
-                        <img src="https://source.unsplash.com/600x400/?artificial-intelligence,data,learning,future" alt="Intelligenza artificiale e apprendimento futuro">
+                <div class="home-preview-grid reverse-grid">
+                    <div class="preview-image animate-on-visible">
+                        <img src="images/ai.png" alt="Intelligenza artificiale e apprendimento futuro">
                     </div>
                     <div class="preview-text animate-on-visible delay-1 glass-card"> 
                         <h2>Abbraccia la Sfida dell'AI</h2>
@@ -84,18 +96,18 @@
                 <h3>Contattaci</h3>
                 <p><strong>Sede legale:</strong> Via dell'Innovazione, 1, 20126 Milano, Italia</p>
                 <p><strong>Email:</strong> info@futurewave.com</p>
-                 <div class="footer-qr-code">
-                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.futurewave.com&bgcolor=ffffff&color=111827&qzone=1" alt="QR Code per connettersi con FutureWave">
-                 </div>
+                    <div class="footer-qr-code">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.futurewave.com&bgcolor=ffffff&color=111827&qzone=1" alt="QR Code per connettersi con FutureWave">
+                    </div>
             </div>
         </div>
     </footer>
 
     <div id="ai-chat-window">
-         <div class="chat-header">
-            <h3>Assistente AI Anonimo</h3>
-            <button id="close-chat-btn" title="Chiudi">&times;</button>
-        </div>
+            <div class="chat-header">
+                <h3>Assistente AI Anonimo</h3>
+                <button id="close-chat-btn" title="Chiudi">&times;</button>
+            </div>
         <div id="chat-messages">
             <div class="chat-message ai">
                 Ciao! Sono l'assistente AI di FutureWave. Le tue domande sono anonime. Chiedimi pure del 'questionario', delle 'challenge' o della formazione dei 'team'.
@@ -120,13 +132,13 @@
              // === 1. LOGICA ANIMAZIONI DI SCORRIMENTO ===
             const sections = document.querySelectorAll('.fade-in-section');
             
-            // Funzione per animare i figli
+             // Funzione per animare i figli
             const animateChildren = (element) => {
                 const animatedChildren = element.querySelectorAll('.animate-on-visible');
                 animatedChildren.forEach(child => child.classList.add('is-visible'));
             };
 
-            // Mostra subito la prima sezione e i suoi figli
+             // Mostra subito la prima sezione e i suoi figli
             if (sections.length > 0) {
                 sections[0].classList.add('is-visible');
                 animateChildren(sections[0]);
@@ -149,7 +161,7 @@
                 } 
             });
 
-            // === 2. LOGICA CHATBOT INTERATTIVO ===
+             // === 2. LOGICA CHATBOT INTERATTIVO ===
             const openChatBtn = document.getElementById('open-chat-btn');
             const chatWindow = document.getElementById('ai-chat-window');
             const closeChatBtn = document.getElementById('close-chat-btn');
@@ -177,13 +189,26 @@
                     const userMessage = chatInput.value.trim(); if (userMessage === '') return; 
                     addMessage(userMessage, 'user'); chatInput.value = ''; chatInput.disabled = true;
                     setTimeout(() => { const aiResponse = getAiResponse(userMessage); addMessage(aiResponse, 'ai'); chatInput.disabled = false; chatInput.focus(); }, 1000 + Math.random() * 500);
-                 };
+                   };
                 const addMessage = (text, sender) => { 
                     const messageElement = document.createElement('div'); messageElement.classList.add('chat-message', sender); messageElement.textContent = text; messagesContainer.appendChild(messageElement); messagesContainer.scrollTop = messagesContainer.scrollHeight; 
                 };
                 sendBtn.addEventListener('click', sendMessage);
                 chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter' && !chatInput.disabled) sendMessage(); });
             }
+            const hamburgerBtn = document.querySelector('.hamburger-menu');
+            const navWrapper = document.querySelector('.nav-wrapper');
+
+        if (hamburgerBtn && navWrapper) {
+            hamburgerBtn.addEventListener('click', () => {
+                hamburgerBtn.classList.toggle('is-active');
+                navWrapper.classList.toggle('is-active');
+                
+                // Aggiorna aria-expanded per accessibilità
+                const isActive = hamburgerBtn.classList.contains('is-active');
+                hamburgerBtn.setAttribute('aria-expanded', isActive);
+            });
+        }
         });
     </script>
 

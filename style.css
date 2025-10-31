@@ -138,6 +138,7 @@ header .container {
     display: flex; 
     align-items: center; 
     gap: 0.5rem; 
+    z-index: 101; /* --- MODIFICATO: Sopra il menu mobile */
 }
 .logo svg {
     width: 40px; 
@@ -153,6 +154,13 @@ header .container {
 }
 .logo:hover .logo-text {
     color: var(--color-primary); 
+}
+
+/* --- NUOVO: Wrapper per nav e accedi (Desktop) --- */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Spazio tra nav e pulsante accedi */
 }
 
 nav {
@@ -187,6 +195,37 @@ nav ul li.nav-active a {
     background-color: rgba(var(--color-primary-rgb), 0.15); /* Sfondo colorato per attivo */
 }
 
+/* --- NUOVO: Pulsante Hamburger --- */
+.hamburger-menu {
+    display: none; /* Nascosto su Desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101; /* Sopra il menu mobile */
+}
+.hamburger-menu span {
+    width: 30px;
+    height: 3px;
+    background: var(--color-text-primary);
+    border-radius: 5px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+/* Animazione Hamburger -> X */
+.hamburger-menu.is-active span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+.hamburger-menu.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.is-active span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
 
 /* ======== Footer (Dark) ======== */
 footer {
@@ -195,12 +234,12 @@ footer {
     text-align: center;
     padding: 3rem 0 2rem 0; 
     margin-top: 5rem;
-    border-top: var(--light-border); /* Usa bordo chiaro */
+    border-top: var(--glass-border); /* --- MODIFICATO: era light-border */
 }
 .footer-contact-info {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: var(--light-border); 
+    border-top: var(--glass-border); /* --- MODIFICATO: era light-border */
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -306,7 +345,7 @@ footer {
 .page-header {
     text-align: center;
     padding-bottom: 2rem;
-    border-bottom: var(--light-border); /* Usa bordo chiaro */
+    border-bottom: var(--glass-border); /* --- MODIFICATO: era light-border */
 }
 .page-header h1 { font-size: 3rem; }
 
@@ -317,7 +356,7 @@ footer {
     text-align: center; 
     color: var(--color-text-primary);
     padding: 4rem 0 2rem 0; 
-    border-bottom: var(--light-border);
+    border-bottom: var(--glass-border); /* --- MODIFICATO: era light-border */
     margin-bottom: 4rem;
 }
 #about-hero .container { text-align: center; }
@@ -396,6 +435,8 @@ ul.styled-list li::before { content: '✓'; color: var(--color-primary); font-we
     transition: all var(--transition-medium); 
     box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3); 
     transform-origin: center;
+    /* --- NUOVO: per header mobile --- */
+    white-space: nowrap; 
 }
 .cta-button:hover {
     transform: translateY(-3px) scale(1.03); 
@@ -438,7 +479,7 @@ form select,
 form textarea {
     width: 100%;
     padding: 0.9rem 1.2rem; 
-    border: var(--light-border); /* Bordo chiaro */
+    border: var(--glass-border); /* --- MODIFICATO: era light-border */
     border-radius: 8px; 
     font-family: var(--font-family);
     font-size: 1rem;
@@ -507,7 +548,7 @@ form select {
 .leaderboard-filters { text-align: left; margin-bottom: 0; }
 .leaderboard-filters span { margin-right: 0.5rem; font-weight: 700; color: var(--color-text-primary); }
 .filter-btn {
-    border: var(--light-border); 
+    border: var(--glass-border); /* --- MODIFICATO: era light-border */
     color: var(--color-text-secondary);
     background: rgba(var(--color-bg-light-rgb), 0.5); /* Usa bg-light trasparente */
     padding: 0.6rem 1.2rem; 
@@ -534,7 +575,7 @@ form select {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
-.leaderboard-table th, .leaderboard-table td { padding: 1.2rem 1rem; text-align: left; border-bottom: var(--light-border); } /* Bordo chiaro */
+.leaderboard-table th, .leaderboard-table td { padding: 1.2rem 1rem; text-align: left; border-bottom: var(--glass-border); } /* --- MODIFICATO: era light-border */
 .leaderboard-table thead {
     background-color: rgba(var(--color-bg-light-rgb), 0.7); /* Header tabella più scuro */
     color: var(--color-text-primary);
@@ -583,7 +624,7 @@ form select {
 
 .kpi-box {
     background: rgba(var(--color-bg-dark-rgb), 0.5); /* Usa bg-dark trasparente */
-    border: var(--light-border);
+    border: var(--glass-border); /* --- MODIFICATO: era light-border */
     border-radius: 10px; 
     padding: 1.5rem; 
 }
@@ -645,7 +686,7 @@ form select {
 .chat-message.ai {
     background-color: var(--color-bg-light); /* Sfondo messaggio AI scuro */
     color: var(--color-text-secondary); 
-    border: var(--light-border);
+    border: var(--glass-border); /* --- MODIFICATO: era light-border */
     border-bottom-left-radius: 2px; align-self: flex-start;
 }
 .chat-message.user {
@@ -655,7 +696,8 @@ form select {
 
 .chat-input-area { display: flex; border-top: var(--glass-border); padding: 0.75rem; background: transparent; }
 #chat-input {
-    flex-grow: 1; border: var(--light-border); background: rgba(var(--color-bg-dark-rgb), 0.7); /* Sfondo input molto scuro */
+    flex-grow: 1; border: var(--glass-border); /* --- MODIFICATO: era light-border */
+    background: rgba(var(--color-bg-dark-rgb), 0.7); /* Sfondo input molto scuro */
     color: white; border-radius: 8px; padding: 0.75rem 1rem; font-size: 1rem;
     outline: none; margin-right: 0.5rem;
 }
@@ -669,23 +711,118 @@ form select {
 /* ======================================= */
 
 
-/* ======== Responsive Design ======== */
+/* ================================================ */
+/* ======== Responsive Design (MODIFICATO) ======== */
+/* ================================================ */
+
 @media (max-width: 900px) {
     .dual-column { flex-direction: column; }
-    header .container { flex-direction: row; justify-content: space-between; }
-    nav { flex-grow: 1; margin-left: 1rem; min-width: 0; }
     .leaderboard-flag-display { display: none; }
+
+    /* --- MODIFICATO: Rimosse regole header che ora sono gestite
+           dalla logica hamburger a 768px --- */
 }
 
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
+    
+    /* --- NUOVO: Padding e Font Generali --- */
+    .container {
+        padding: 0 1.5rem;
+    }
+    section {
+        padding: 3rem 0;
+    }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    
+    /* --- NUOVO: Logica Menu Hamburger --- */
+    .hamburger-menu {
+        display: flex; /* Mostra il pulsante hamburger */
+    }
+
+    .nav-wrapper {
+        position: absolute;
+        top: 100%; /* Si posiziona sotto l'header */
+        left: 0;
+        width: 100%;
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        /* Nasconde il menu da chiuso */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        visibility: hidden;
+        
+        padding: 0;
+        transition: all 0.3s ease-in-out;
+    }
+    .nav-wrapper.is-active {
+        /* Mostra il menu da aperto */
+        max-height: 80vh; /* Altezza massima */
+        opacity: 1;
+        visibility: visible;
+        padding: 1.5rem 0;
+    }
+
+    /* Stile link menu mobile */
+    .nav-wrapper nav {
+        width: 100%;
+        overflow: visible; /* Rimuove scroll orizzontale */
+    }
+    .nav-wrapper nav ul {
+        flex-direction: column; /* Link in colonna */
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+        white-space: normal;
+    }
+    .nav-wrapper nav ul li {
+        margin-left: 0;
+        width: 90%;
+        text-align: center;
+    }
+    .nav-wrapper nav ul li a {
+        padding: 0.8rem 1rem;
+        font-size: 1.1rem;
+        display: block; /* Occupa tutta la larghezza */
+    }
+
+    /* Stile pulsante "Accedi" menu mobile */
+    .nav-wrapper .cta-button {
+        width: 90%;
+        text-align: center;
+        margin-left: 0;
+        margin-top: 1rem; /* Spazio sopra il pulsante */
+    }
+    .nav-wrapper .cta-button:hover {
+        transform: none; /* Rimuove animazione hover su mobile */
+    }
+
+
+    /* --- Sezioni Hero Mobile --- */
+    #hero {
+        padding: 3rem 0;
+        min-height: auto;
+    }
     #hero, #about-hero { text-align: left; }
     #hero .container, #about-hero .container { text-align: left; }
-    #hero h1, #about-hero h1 { font-size: 3rem; }
+    #hero h1, #about-hero h1 { font-size: 2.5rem; }
+    #about-hero {
+        padding: 3rem 0 2rem 0;
+        margin-bottom: 2rem;
+    }
     .preview-section:nth-child(even) .home-preview-grid .preview-image { order: -1; }
 
-    /* Formazione AI mobile */
+
+    /* --- Formazione AI mobile (Regole esistenti OK) --- */
     .step-section { padding: 2rem 1.5rem; }
     .step-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.5rem; }
     .step-circle { width: 50px; height: 50px; font-size: 1.8rem; }
@@ -694,17 +831,45 @@ form select {
     .step-content p { font-size: 1rem; }
     .kpi-list { flex-direction: column; gap: 0.5rem; }
 
-    /* Header mobile */
-    .logo-text { font-size: 1.1rem; }
-    .logo svg { width: 35px; height: 35px; }
-    nav ul li { margin-left: 0.5rem; }
-    nav ul li a { font-size: 0.85rem; padding: 0.4rem; }
     
-    /* Classifica mobile */
+    /* --- Classifica mobile (Regole esistenti OK + Fix Tabella) --- */
     .leaderboard-header { flex-direction: column; align-items: flex-start; }
     .leaderboard-filters { width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 0.5rem; }
 
-    /* Chat mobile */
+    /* --- NUOVO: Fix per Tabella Classifica --- */
+    .leaderboard-table {
+        display: block; /* Permette lo scroll orizzontale */
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap; /* Impedisce alla tabella di andare a capo */
+    }
+    .leaderboard-table tbody {
+        /* Assicura che la tabella occupi lo spazio necessario */
+        min-width: 600px; 
+    }
+    
+
+    /* --- Chat mobile (Regole esistenti OK) --- */
     .ai-chat-bubble { width: 50px; height: 50px; bottom: 1rem; right: 1rem; }
-    #ai-chat-window { bottom: 1rem; right: 1rem; width: calc(100% - 2rem); height: calc(100% - 2rem); }
+    #ai-chat-window { bottom: 1rem; right: 1rem; width: calc(100% - 2rem); max-height: calc(100% - 2rem); }
+}
+
+
+/* --- NUOVO: Media Query per schermi molto piccoli --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    #hero h1, #about-hero h1 {
+        font-size: 2.2rem; /* Riduci ulteriormente i titoli principali */
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .step-section {
+        padding: 1.5rem;
+    }
+    .glass-card {
+        padding: 1.5rem;
+    }
 }
